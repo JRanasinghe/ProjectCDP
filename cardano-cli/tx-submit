@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    >&2 echo "expected transaction name as argument"
+    exit 1
+fi
+
+cardano-cli transaction submit \
+--tx-file "$TX_PATH/$1.signed" \
+$NET
+
+if [ $? -eq 0 ]; then
+  echo -e "View transaction:\n"
+  echo -e "\thttps://$TESTNET_NAME.cardanoscan.io/transaction/$(tx-hash $1)"
+fi

@@ -1,0 +1,20 @@
+ignore-project: False
+with-compiler: ghc-8.10.7
+
+-- Prevents HLS errors
+flags: +defer-plugin-errors
+
+-- Required if not installing IOG libsodium fork: use ported C code
+package cardano-crypto-praos
+  flags: -external-libsodium-vrf
+
+package trace-dispatcher
+  ghc-options: -Wwarn
+
+package HsOpenSSL
+  flags: -homebrew-openssl
+
+allow-newer:
+  -- servant-docs-0.12 pre-02-25-2023 revision is incompatible with lens 5.2
+ -- remove this after haskell.nix HLS bug is resolved and flake/index-state can be updated
+  , servant-docs:lens

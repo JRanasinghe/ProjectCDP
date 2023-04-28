@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cardano-cli query protocol-parameters \
+$NET \
+--out-file $PARAMS_PATH
+
+if [ $? -eq 0 ]; then
+  echo "saved protocol parameters to '$PARAMS_PATH'"
+fi
